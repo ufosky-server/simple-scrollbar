@@ -1,0 +1,22 @@
+{
+  "name": "simple-scrollbar",
+  "version": "0.2.0",
+  "description": "Very simple and lightweight vanilla javascript library for creating a custom scrollbar cross-browser",
+  "main": "simple-scrollbar.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/olegshilov/simple-scrollbar.git"
+  },
+  "keywords": [
+    "scrollbar"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/olegshilov/simple-scrollbar/issues"
+  },
+  "homepage": "https://github.com/olegshilov/simple-scrollbar#readme"
+}
