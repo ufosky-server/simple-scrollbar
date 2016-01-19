@@ -80,7 +80,7 @@ class Scrollbar {
         _this.bar.classList.add('ss-hidden');
       } else {
         _this.bar.classList.remove('ss-hidden');
-        _this.bar.style.cssText = 'height:' + (_this.scrollRatio) * 100 + '%; top:' + (_this.element.scrollTop / totalHeight ) * 100 + '%; right:-' + (_this.target.clientWidth - _this.bar.clientWidth) + 'px;';
+        _this.bar.style.cssText = `height:${_this.scrollRatio * 100}%; top:${(_this.element.scrollTop / totalHeight) * 100}%;`;
       }
     });
   };
