@@ -67,6 +67,8 @@ class Scrollbar {
     this.target.classList.add('ss-container');
   }
 
+  scrollTo = (top) => this.element.scrollTop = top;
+
   handleMoveBar = (event) => {
     let totalHeight = this.element.scrollHeight;
     let ownHeight = this.element.clientHeight;
@@ -88,6 +90,7 @@ class Scrollbar {
 
 class SimpleScrollbar {
   constructor() {
+    this.scrolls = [];
     this.initAll();
   }
 
@@ -96,8 +99,11 @@ class SimpleScrollbar {
       return false;
     }
 
-    Object.defineProperty(element, 'data-simple-scrollbar', new Scrollbar(element));
+    this.scrolls[element] = new Scrollbar(element);
+    Object.defineProperty(element, 'data-simple-scrollbar', this.scrolls[element]);
   }
+
+  scrollTo = (target, to) => this.scrolls[target].scrollTo(to);
 
   initAll() {
     const nodes = document.querySelectorAll('*[ss-container]');
