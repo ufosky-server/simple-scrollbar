@@ -44,6 +44,7 @@ class Scrollbar {
 
     this.wrapper = document.createElement('div');
     this.wrapper.setAttribute('class', 'ss-wrapper');
+    window.addEventListener('resize', this.handleResize);
 
     this.area = document.createElement('div');
     this.area.setAttribute('class', 'ss-scrollarea');
@@ -90,6 +91,10 @@ class Scrollbar {
         _this.bar.style.cssText = `height:${_this.scrollRatio * 100}%; top:${(_this.area.scrollTop / totalHeight) * 100}%;`;
       }
     });
+  };
+
+  handleResize = () => {
+    this.element.style.cssText=`width:${this.wrapper.offsetWidth}px`;
   };
 }
 
