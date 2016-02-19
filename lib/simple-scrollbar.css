@@ -6,7 +6,7 @@
     float: left;
     overflow: hidden;
     height: 100%; }
-    .ss-container .ss-wrapper .ss-content {
+    .ss-container .ss-wrapper .ss-scrollarea {
       position: relative;
       overflow: auto;
       width: 100%;

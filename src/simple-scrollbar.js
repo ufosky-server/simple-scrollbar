@@ -25,7 +25,7 @@ class DragDealer {
     const delta = event.pageY - this.lastPageY;
     this.lastPageY = event.pageY;
 
-    raf(() => this.context.element.scrollTop += delta / this.context.scrollRatio);
+    raf(() => this.context.area.scrollTop += delta / this.context.scrollRatio);
   };
 
   handleStop = () =>{
@@ -45,10 +45,14 @@ class Scrollbar {
     this.wrapper = document.createElement('div');
     this.wrapper.setAttribute('class', 'ss-wrapper');
 
+    this.area = document.createElement('div');
+    this.area.setAttribute('class', 'ss-scrollarea');
+
     this.element = document.createElement('div');
     this.element.setAttribute('class', 'ss-content');
 
-    this.wrapper.appendChild(this.element);
+    this.area.appendChild(this.element);
+    this.wrapper.appendChild(this.area);
 
     while (this.target.firstChild) {
       this.element.appendChild(this.target.firstChild);
@@ -61,28 +65,29 @@ class Scrollbar {
     new DragDealer(this.bar, this);
     this.handleMoveBar();
 
-    this.element.addEventListener('scroll', this.handleMoveBar);
-    this.element.addEventListener('mouseenter', this.handleMoveBar);
+    this.area.addEventListener('scroll', this.handleMoveBar);
+    this.area.addEventListener('mouseenter', this.handleMoveBar);
 
     this.target.classList.add('ss-container');
+    this.element.style.cssText=`width:${this.wrapper.offsetWidth}px`;
   }
 
-  scrollTo = (top) => this.element.scrollTop = top;
+  scrollTo = (top) => this.area.scrollTop = top;
 
   handleMoveBar = (event) => {
-    let totalHeight = this.element.scrollHeight;
-    let ownHeight = this.element.clientHeight;
+    let totalHeight = this.area.scrollHeight;
+    let ownHeight = this.area.clientHeight;
     let _this = this;
 
     this.scrollRatio = ownHeight / totalHeight;
 
     raf(() => {
       // Hide scrollbar if no scrolling is possible
-      if (_this.scrollRatio == 1) {
+      if (_this.scrollRatio === 1) {
         _this.bar.classList.add('ss-hidden');
       } else {
         _this.bar.classList.remove('ss-hidden');
-        _this.bar.style.cssText = `height:${_this.scrollRatio * 100}%; top:${(_this.element.scrollTop / totalHeight) * 100}%;`;
+        _this.bar.style.cssText = `height:${_this.scrollRatio * 100}%; top:${(_this.area.scrollTop / totalHeight) * 100}%;`;
       }
     });
   };
@@ -109,7 +114,6 @@ class SimpleScrollbar {
     const nodes = document.querySelectorAll('*[ss-container]');
 
     for (var i = 0; i < nodes.length; i++) {
-      console.debug('init node', i);
       this.initElement(nodes[i]);
     }
   }
