@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/actorapp/simple-scrollbar.git"
+    "url": "actorapp/simple-scrollbar"
   },
   "keywords": [
     "scrollbar"
